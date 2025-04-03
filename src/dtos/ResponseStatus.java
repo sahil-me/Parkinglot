@@ -1,4 +1,6 @@
 package dtos;
 
-public class ResponseStatus {
+public enum ResponseStatus {
+    SUCCESS,
+    FAILURE,
 }

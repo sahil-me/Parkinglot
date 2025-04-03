@@ -1,4 +1,13 @@
-package strategies;
+package strategies.spotAssignmentStrategy;
 
-public class RandomSpotAssignmentStrategy {
+import models.Gate;
+import models.ParkingSpot;
+import models.enums.VehicleType;
+
+public class RandomSpotAssignmentStrategy implements SpotAssignmentStrategy{
+    @Override
+    public ParkingSpot assignSpot(VehicleType vehicleType, Gate gate) {
+        // Code for assigning a random spot in the parking lot
+        return null;
+    }
 }

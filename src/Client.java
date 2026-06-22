@@ -18,17 +18,29 @@ public class Client {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Program started");
+        System.out.println("Program started \n");
 
         GateRepository gateRepository = new GateRepository();
         TicketRepository ticketRepository = new TicketRepository();
         ParkingLotRepository parkingLotRepository = new ParkingLotRepository();
         VehicleRepository vehicleRepository = new VehicleRepository();
 
-        // Create a gate and save it
-        Gate gate = new Gate();
-        gate.setGateNumber(1);
-        gate = gateRepository.save(gate);
+        // Create gates and save them
+        Gate gate1 = new Gate();
+        gate1.setGateNumber(1);
+        gate1 = gateRepository.save(gate1);
+
+        Gate gate2 = new Gate();
+        gate2.setGateNumber(2);
+        gate2 = gateRepository.save(gate2);
+
+        Gate gate3 = new Gate();
+        gate3.setGateNumber(3);
+        gate3 = gateRepository.save(gate3);
+
+        Gate gate4 = new Gate();
+        gate4.setGateNumber(4);
+        gate4 = gateRepository.save(gate4);
 
         // Create a parking lot and save it
         ParkingLot parkingLot = new ParkingLot();
@@ -36,7 +48,7 @@ public class Client {
                 SpotAssignmentStrategyType.CHEAPEST
         );
 
-        parkingLot.setGates(List.of(gate));
+        parkingLot.setGates(List.of(gate1, gate2, gate3, gate4));
 
         parkingLotRepository.save(parkingLot);
 
@@ -62,10 +74,13 @@ public class Client {
 
         while (true) {
 
+            System.out.print("Gate Number (1-4): ");
+            Long gateId = Long.parseLong(sc.nextLine());
+
             IssueTicketRequestDto issueTicketRequestDto =
                     new IssueTicketRequestDto();
 
-            issueTicketRequestDto.setGateId(gate.getId());
+            issueTicketRequestDto.setGateId(gateId);
 
             System.out.print("Owner Name: ");
             issueTicketRequestDto.setOwnerName(sc.nextLine());

@@ -27,9 +27,12 @@ public class TicketController {
             issueTicketResponseDto.setResponseStatus(ResponseStatus.SUCCESS);
             issueTicketResponseDto.setTicket(ticket);
         }
+
         catch (Exception e) {
+            e.printStackTrace();
             issueTicketResponseDto.setResponseStatus(ResponseStatus.FAILURE);
         }
+
         return issueTicketResponseDto;
     }
 }

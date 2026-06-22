@@ -1,6 +1,7 @@
 package services;
 
 import exceptions.GateNotFoundException;
+import exceptions.ParkingLotNotFoundException;
 import factories.SpotAssignmentStrategyFactory;
 import models.*;
 import models.enums.VehicleType;
@@ -12,6 +13,7 @@ import strategies.spotAssignmentStrategy.SpotAssignmentStrategy;
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 public class TicketService {
     private GateRepository gateRepository;
@@ -34,7 +36,8 @@ public class TicketService {
             String vehicleNumber,
             Long gateId,
             String ownerName,
-            VehicleType vehicleType) throws GateNotFoundException {
+            VehicleType vehicleType)
+            throws GateNotFoundException, ParkingLotNotFoundException {
 
         Ticket ticket = new Ticket();
         ticket.setEntryTime(new Date());
@@ -43,6 +46,7 @@ public class TicketService {
         if (optionalGate.isEmpty()) {
             throw new GateNotFoundException("Please enter a valid gate number");
         }
+
         Gate gate = optionalGate.get();;
         ticket.setGate(gate);
 
@@ -61,12 +65,13 @@ public class TicketService {
         }
 
         ticket.setVehicle(newVehicle);
-        ticket.setNumber("ticket-number");
+        ticket.setNumber("TKT-" + UUID.randomUUID().toString().substring(0, 8));
 
         Optional<ParkingLot> optionalParkingLot = parkingLotRepository.findParkingLotByGateId(gateId);
 
         if (optionalParkingLot.isEmpty()) {
             // throw exception
+            throw new ParkingLotNotFoundException("Parking lot not found");
         }
 
         ParkingLot parkingLot = optionalParkingLot.get();

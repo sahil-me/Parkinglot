@@ -16,15 +16,13 @@ public class GateRepository {
     }
 
     public Gate save(Gate gate) {
-        // Update + insert => Upsert
-        if(gate.getId() == 0){
-            // insert
-            id = id + 1;
+
+        if (gate.getId() == null || gate.getId() == 0) {
+            id++;
             gate.setId(id);
             gateMap.put(id, gate);
             return gate;
         }
-        gateMap.put(gate.getId(), gate);
         return gate;
     }
 
@@ -36,8 +34,9 @@ public class GateRepository {
     }
 }
 
-// Gate Object ->
-// Gate status -> open, Operator -> {}, gateType -> entry, gate number -> 1
-// 1 -> Gate1
-// 2 -> Gate2
-// 3 -> Gate3
+/* Gate Object ->
+ Gate status -> open, Operator -> {}, gateType -> entry, gate number -> 1
+ 1 -> Gate1
+ 2 -> Gate2
+ 3 -> Gate3 */
+

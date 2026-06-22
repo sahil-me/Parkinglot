@@ -2,7 +2,7 @@ package models;
 
 import java.util.Date;
 
-public class Ticket extends BaseModel{
+public class Ticket extends BaseModel {
     private String number;
     private Date entryTime;
     private Vehicle vehicle;
@@ -47,5 +47,17 @@ public class Ticket extends BaseModel{
 
     public void setGate(Gate gate) {
         this.gate = gate;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket {\n" +
+                "    Id = " + getId() + ",\n" +
+                "    Number = '" + number + "',\n" +
+                "    Entry Time = " + entryTime + ",\n" +
+                "    Gate = " + gate.getGateNumber() + ",\n" +
+                "    Vehicle = '" + vehicle.getVehicleNumber() + "',\n" +
+                "    Owner = '" + vehicle.getOwnerName() + "'\n" +
+                "}";
     }
 }

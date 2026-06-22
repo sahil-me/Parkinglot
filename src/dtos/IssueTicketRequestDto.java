@@ -1,4 +1,4 @@
-package parkinglot.dtos;
+package dtos;
 
 import models.enums.VehicleType;
 

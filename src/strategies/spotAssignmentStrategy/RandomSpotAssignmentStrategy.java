@@ -5,9 +5,16 @@ import models.ParkingSpot;
 import models.enums.VehicleType;
 
 public class RandomSpotAssignmentStrategy implements SpotAssignmentStrategy{
+
     @Override
     public ParkingSpot assignSpot(VehicleType vehicleType, Gate gate) {
-        // Code for assigning a random spot in the parking lot
-        return null;
+
+        ParkingSpot spot = new ParkingSpot();
+
+        int randomSpot = 100 + (int)(Math.random() * 900);
+
+        spot.setParkingSpotNumber("P-" + randomSpot);
+
+        return spot;
     }
 }

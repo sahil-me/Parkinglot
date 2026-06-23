@@ -6,15 +6,15 @@ import models.enums.VehicleType;
 import java.util.List;
 
 public class ParkingSpot extends BaseModel{
-    private int parkingSpotNumber;
+    private String parkingSpotNumber;
     private ParkingSpotStatus parkingSpotStatus;
     private List<VehicleType> supportedVehicleTypes;
 
-    public int getParkingSpotNumber() {
+    public String getParkingSpotNumber() {
         return parkingSpotNumber;
     }
 
-    public void setParkingSpotNumber(int parkingSpotNumber) {
+    public void setParkingSpotNumber(String parkingSpotNumber) {
         this.parkingSpotNumber = parkingSpotNumber;
     }
 

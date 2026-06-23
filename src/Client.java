@@ -18,7 +18,11 @@ public class Client {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Program started \n");
+        System.out.println("=========================================");
+        System.out.println("           PARKING LOT SYSTEM");
+        System.out.println("=========================================\n");
+
+        System.out.println("Welcome to Parking Lot!\n");
 
         GateRepository gateRepository = new GateRepository();
         TicketRepository ticketRepository = new TicketRepository();
@@ -43,9 +47,12 @@ public class Client {
         gate4 = gateRepository.save(gate4);
 
         // Create a parking lot and save it
+        System.out.print("Select Spot (CHEAPEST/RANDOM): ");
+        String strategy = sc.nextLine().toUpperCase();
+
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.setSpotAssignmentStrategyType(
-                SpotAssignmentStrategyType.CHEAPEST
+                SpotAssignmentStrategyType.valueOf(strategy)
         );
 
         parkingLot.setGates(List.of(gate1, gate2, gate3, gate4));
@@ -61,16 +68,6 @@ public class Client {
         );
 
         TicketController ticketController = new TicketController(ticketService);
-
-//        IssueTicketRequestDto issueTicketRequestDto = new IssueTicketRequestDto();
-//        issueTicketRequestDto.setGateId(gate.getId());
-//        issueTicketRequestDto.setOwnerName("Sahil Sharma");
-//        issueTicketRequestDto.setVehicleNumber("DL 8CAF 9999");
-//        issueTicketRequestDto.setVehicleType(VehicleType.LARGE);
-//
-//        IssueTicketResponseDto responseDto = ticketController.issueTicket(issueTicketRequestDto);
-//
-//        System.out.println("Ticket: " + responseDto.getTicket());
 
         while (true) {
 
@@ -88,12 +85,21 @@ public class Client {
             System.out.print("Vehicle Number: ");
             issueTicketRequestDto.setVehicleNumber(sc.nextLine());
 
-            issueTicketRequestDto.setVehicleType(VehicleType.LARGE);
+            System.out.print("Vehicle Type (SMALL/MEDIUM/LARGE): ");
+            VehicleType vehicleType =
+                    VehicleType.valueOf(sc.nextLine().toUpperCase());
+
+            issueTicketRequestDto.setVehicleType(vehicleType);
 
             IssueTicketResponseDto responseDto =
                     ticketController.issueTicket(issueTicketRequestDto);
 
-            System.out.println("Ticket: " + responseDto.getTicket());
+            if (responseDto.getTicket() != null) {
+                System.out.println();
+                System.out.println(responseDto.getTicket());
+            } else {
+                System.out.println("Ticket generation failed.");
+            }
 
             System.out.print("\nIssue another ticket? (Y/N): ");
             String choice = sc.nextLine();

@@ -51,13 +51,38 @@ public class Ticket extends BaseModel {
 
     @Override
     public String toString() {
-        return "Ticket {\n" +
-                "    Id = " + getId() + ",\n" +
-                "    Number = '" + number + "',\n" +
-                "    Entry Time = " + entryTime + ",\n" +
-                "    Gate = " + gate.getGateNumber() + ",\n" +
-                "    Vehicle = '" + vehicle.getVehicleNumber() + "',\n" +
-                "    Owner = '" + vehicle.getOwnerName() + "'\n" +
-                "}";
+        return """
+            =========================================
+                         PARKING RECEIPT
+            =========================================
+
+            Ticket ID      : %d
+            Ticket Number  : %s
+            Entry Time     : %s
+            Gate Number    : %d
+            Vehicle Number : %s
+            Vehicle Type   : %s
+            Owner Name     : %s
+
+            Status         : ACTIVE
+            Parking Spot   : %s
+
+            =========================================
+            Thank you for using Parking Lot!
+            Have a nice day!
+            =========================================
+            """
+                .formatted(
+                        getId(),
+                        number,
+                        entryTime,
+                        gate.getGateNumber(),
+                        vehicle.getVehicleNumber(),
+                        vehicle.getVehicleType(),
+                        vehicle.getOwnerName(),
+                        parkingSpot != null
+                                ? parkingSpot.getParkingSpotNumber()
+                                : "N/A"
+                );
     }
 }

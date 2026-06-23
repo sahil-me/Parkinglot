@@ -5,5 +5,6 @@ import models.ParkingSpot;
 import models.enums.VehicleType;
 
 public interface SpotAssignmentStrategy {
+
     public ParkingSpot assignSpot(VehicleType vehicleType, Gate gate);
 }
